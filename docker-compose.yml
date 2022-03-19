@@ -4,7 +4,6 @@ services:
   postgres:
     container_name: postgres
     image: postgres
-    restart: always
     environment:
       POSTGRES_USER: portfolio
       POSTGRES_PASSWORD: portfolio
@@ -14,3 +13,15 @@ services:
       - ./postgres:/data/postgres
     ports:
       - 5432:5432
+  gradle:
+    build:
+      context: .
+      dockerfile: ./docker/gradle/Dockerfile
+    depends_on:
+      - postgres
+  maven:
+    build:
+      context: .
+      dockerfile: ./docker/maven/Dockerfile
+    depends_on:
+      - postgres
