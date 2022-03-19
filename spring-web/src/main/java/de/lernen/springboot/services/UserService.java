@@ -18,6 +18,11 @@ public class UserService implements IService<User> {
     }
 
     @Override
+    public void create(User user) {
+        repository.save(user);
+    }
+
+    @Override
     public List<User> getAll() {
         return repository.findAll();
     }

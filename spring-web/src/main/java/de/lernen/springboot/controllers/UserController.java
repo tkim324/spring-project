@@ -5,6 +5,7 @@ import de.lernen.springboot.services.IService;
 import de.lernen.springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,8 +20,14 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/users")
+    @PostMapping(path = "/users", consumes = "application/json")
+    private void create(User user){
+        service.create(user);
+    }
+
+    @GetMapping(path ="/users", produces = "application/json")
     private List<User> getAllUsers() {
         return service.getAll();
     }
+
 }
